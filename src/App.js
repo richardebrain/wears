@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-
+import Hompepage from './hompPage.component';
 function App() {
   return (
     <div className="App">
@@ -22,4 +22,4 @@ function App() {
   );
 }
 
-export default App;
+export default Homepage;
