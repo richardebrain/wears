@@ -1,8 +1,17 @@
 import React from "react";
 import "./menu-item.styles.scss";
+import { withRouter } from "../withRouter";
 
-const MenuItem = ({ imageUrl, size, title }) => (
-  <div className={`${size} menu-item`}>
+
+
+
+const MenuItem = ({ imageUrl, size, title, linkUrl, router }) => {
+  const { location, navigate } = router;
+return (
+  <div
+    className={`${size} menu-item`}
+    onClick={() => navigate(`${location.pathname}${linkUrl}`)}
+  >
     <div
       className="background-image"
       style={{ backgroundImage: `url(${imageUrl})` }}
@@ -12,6 +21,7 @@ const MenuItem = ({ imageUrl, size, title }) => (
       <span className="subtitle">SHOP NOW</span>
     </div>
   </div>
-);
+)
+}
 
-export default MenuItem;
+export default withRouter(MenuItem);
