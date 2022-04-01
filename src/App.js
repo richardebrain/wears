@@ -1,6 +1,6 @@
 import './App.css';
 import Homepage from './pages/homepage/hompPage.component';
-import { Route, Routes, Navigate} from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import ShopPage from './pages/shop/shop.component';
 import Header from './component/header/header.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up-page/sign-in-and-sign-up-page.component';
@@ -10,7 +10,9 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { getDoc } from 'firebase/firestore';
 import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
-
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from './redux/user.selectors';
+import CheckoutPage from './pages/checkout/checkout.component';
 
 
 class App extends React.Component {
@@ -40,21 +42,21 @@ class App extends React.Component {
       <div>
         <Header />
         <Routes>
-          <Route path='/' element={<Homepage />} />
+          <Route exact path='/' element={<Homepage />} />
           <Route path='shop' element={<ShopPage />} />
           {/* <Route path='signin' element={<SignInAndSignUpPage/>}/> */}
-          <Route exact path='signin' element={currentUser ? <Navigate to='/'/> : <SignInAndSignUpPage />} />
+          <Route exact path='signin' element={currentUser ? <Navigate to='/' /> : <SignInAndSignUpPage />} />
+
+          <Route exact path='checkout' element={<CheckoutPage />} />
 
         </Routes>
-
-
 
       </div>
     )
   }
 }
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
 
 })
 const mapDispatchToProps = dispatch => ({
