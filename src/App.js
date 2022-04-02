@@ -43,10 +43,8 @@ class App extends React.Component {
         <Header />
         <Routes>
           <Route exact path='/' element={<Homepage />} />
-          <Route path='shop' element={<ShopPage />} />
-          {/* <Route path='signin' element={<SignInAndSignUpPage/>}/> */}
+          <Route path='shop/*' element={<ShopPage />} />
           <Route exact path='signin' element={currentUser ? <Navigate to='/' /> : <SignInAndSignUpPage />} />
-
           <Route exact path='checkout' element={<CheckoutPage />} />
 
         </Routes>
