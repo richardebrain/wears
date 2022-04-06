@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../assets/crown.svg";
-import './header.styles.scss'
+
 import { auth } from "../../firebase/firebase.utils";
 import { signOut } from "firebase/auth";
 import { connect } from "react-redux";
@@ -10,31 +9,33 @@ import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { selectCartHiddden } from "../../redux/cart/cart.selectors";
 import { createStructuredSelector } from "reselect";
+import { OptionLink, OptionDiv,LogoContainer,OptionsContainer,HeaderContainer} from "./header.styles";
 
 const Header = ({currentUser,hidden}) => {
   return  (
-    <div className="header">
-      <Link className="logo-container" to="/">
+    <HeaderContainer>
+      <LogoContainer to="/">
         <Logo className="logo" />
-      </Link>
-      <div className="options">
-        <Link className="option" to="/shop">
+      </LogoContainer>
+      <OptionsContainer>
+        <OptionLink to="/shop">
           SHOP
-        </Link>
-        <Link className="option" to="/shop">
+        </OptionLink>
+        <OptionLink to="/shop">
           CONTACT
-        </Link>
+        </OptionLink>
         {
           currentUser ?
-          <div className="option" onClick={()=>signOut(auth)}>SIGN OUT</div>
+          <OptionDiv onClick={()=>signOut(auth)}>SIGN OUT</OptionDiv>
           :
-          <Link className="option" to='/signin'>SIGN IN</Link>
+          <OptionLink to='/signin'>SIGN IN</OptionLink>
         }
        
         <CartIcon/>
-      </div>
+      </OptionsContainer>
       { hidden ? null :
-        <CartDropdown/>}    </div>
+        <CartDropdown/>}    
+        </HeaderContainer>
   );
   
 }
@@ -43,5 +44,5 @@ const mapStateToProps = createStructuredSelector({
   currentUser:selectCurrentUser,
   hidden:selectCartHiddden
 })
-
+//used styled component instead of normal css files
 export default connect(mapStateToProps)(Header);

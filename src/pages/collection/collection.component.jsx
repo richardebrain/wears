@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { withRouter } from "../../component/withRouter";
 
 const CollectionPage =({collection}) =>{
-  const {title,items}= collection
+  const {title,items}= collection;
   
   return(
   <div className="collection-page">

@@ -1,6 +1,6 @@
 // import firebase from 'firebase/app'
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, doc, getDoc, setDoc,} from 'firebase/firestore';
+import { getFirestore, collection, doc, getDoc, setDoc,writeBatch, onSnapshot} from 'firebase/firestore';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 
@@ -57,4 +57,54 @@ export const signInWithGoogle = () => signInWithPopup(auth, provider)
     console.log('error signing with pop up',error.message)
 
   });
-// export default firebase;
+
+
+  export const convertCollectionsSnapshotToMap=(collections)=>{
+ 
+     const transformedCollection = collections.docs.map(doc=>{
+
+      const {title,items} =doc.data();
+      return {
+        routeName:encodeURI(title.toLowerCase()),
+        id:doc.id,
+        title,
+        items
+      }
+      
+    });
+    return transformedCollection.reduce((accumulator,collection)=>{
+      accumulator[collection.title.toLowerCase()]=collection;
+      return accumulator
+    },{})
+  }
+       
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//adding collections and documents to our firebase firestore
+//   export const addCollectionAndDocuments =async (collectionKey,ObjectsToAdd)=>{
+//     const collectionRef = collection(db,collectionKey);  
+//     const batch = writeBatch(db)
+//     ObjectsToAdd.forEach(obj=>{
+//       const newDocRef=doc(collectionRef, )
+//       batch.set(newDocRef,obj)
+     
+//     })
+//  return await batch.commit()
+//   }
