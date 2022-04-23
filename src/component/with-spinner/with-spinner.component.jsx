@@ -14,7 +14,7 @@ import { SpinnerContainer, SpinnerOverlay } from "./with-spinner.styles";
 //alternative for what's above
 const WithSpinner = (WrappedComponent) => {
   const spinner = ({ isLoading }) => {
-    console.log(isLoading)
+    
     return isLoading ? (
       <SpinnerOverlay>
         {/* <p>loading...</p> */}
