@@ -1,6 +1,6 @@
 // import firebase from 'firebase/app'
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, doc, getDoc, setDoc,writeBatch, onSnapshot} from 'firebase/firestore';
+import { getFirestore, collection, doc, getDoc, setDoc} from 'firebase/firestore';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 
